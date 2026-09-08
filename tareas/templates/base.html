@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Gestor de tareas{% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        <h2>
+            <a href="{% url 'proyecto_list' %}">Gestor Django</a>
+        </h2>
+
+        {% if user.is_authenticated %}
+            <p>
+                Hola, {{ user.username }}
+
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Salir</button>
+                </form>
+            </p>
+        {% else %}
+            <a href="{% url 'login' %}">Ingresar</a>
+            <a href="{% url 'registro' %}">Registrarse</a>
+        {% endif %}
+    </header>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

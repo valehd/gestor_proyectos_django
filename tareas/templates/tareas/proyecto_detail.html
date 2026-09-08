@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ proyecto.nombre }}{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'proyecto_list' %}">Volver</a>
+
+<h1>{{ proyecto.nombre }}</h1>
+<p>{{ proyecto.descripcion }}</p>
+
+<a href="{% url 'proyecto_update' proyecto.pk %}">Editar proyecto</a>
+<a href="{% url 'proyecto_delete' proyecto.pk %}">Eliminar proyecto</a>
+
+<hr>
+
+<h2>Tareas</h2>
+
+<a href="{% url 'tarea_create' proyecto.pk %}">Nueva tarea</a>
+
+{% if proyecto.tareas.all %}
+
+    <ul>
+        {% for tarea in proyecto.tareas.all %}
+            <li>
+                <strong>{{ tarea.titulo }}</strong>
+                - {{ tarea.get_estado_display }}
+
+                <br>
+
+                {{ tarea.descripcion }}
+
+                <br>
+
+                <a href="{% url 'tarea_update' tarea.pk %}">Editar</a>
+                <a href="{% url 'tarea_delete' tarea.pk %}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+
+    <p>Este proyecto no tiene tareas.</p>
+
+{% endif %}
+
+{% endblock %}

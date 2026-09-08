@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis proyectos{% endblock %}
+
+{% block content %}
+
+<h1>Mis proyectos</h1>
+
+<a href="{% url 'proyecto_create' %}">Nuevo proyecto</a>
+
+<hr>
+
+{% if proyectos %}
+
+    {% for proyecto in proyectos %}
+        <h3>{{ proyecto.nombre }}</h3>
+        <p>{{ proyecto.descripcion }}</p>
+        <p>Total tareas: {{ proyecto.tareas.count }}</p>
+
+        <a href="{% url 'proyecto_detail' proyecto.pk %}">Ver detalle</a>
+
+        <hr>
+    {% endfor %}
+
+{% else %}
+
+    <p>No tienes proyectos registrados.</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar tarea{% endblock %}
+
+{% block content %}
+
+<h1>Eliminar tarea</h1>
+
+<p>¿Seguro que deseas eliminar "{{ object.titulo }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    <button type="submit">Sí, eliminar</button>
+</form>
+
+<a href="{% url 'proyecto_detail' object.proyecto.pk %}">Cancelar</a>
+
+{% endblock %}
