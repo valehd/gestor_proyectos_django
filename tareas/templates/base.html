@@ -1,35 +1,54 @@
+{% load static %}
+
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Gestor de tareas{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
 
-    <header>
-        <h2>
-            <a href="{% url 'proyecto_list' %}">Gestor Django</a>
-        </h2>
+    <header class="site-header">
+        <nav class="container nav">
+            <a class="brand" href="{% url 'proyecto_list' %}">
+                Gestor Django
+            </a>
 
-        {% if user.is_authenticated %}
-            <p>
-                Hola, {{ user.username }}
+            <div class="nav-links">
+                {% if user.is_authenticated %}
+                    <span>Hola, {{ user.username }}</span>
 
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">Salir</button>
-                </form>
-            </p>
-        {% else %}
-            <a href="{% url 'login' %}">Ingresar</a>
-            <a href="{% url 'registro' %}">Registrarse</a>
-        {% endif %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="link-button">
+                            Salir
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Ingresar</a>
+                    <a href="{% url 'registro' %}">Registrarse</a>
+                {% endif %}
+            </div>
+        </nav>
     </header>
 
-    <hr>
+    <main class="container page">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="message {{ message.tags }}">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </main>
 
 </body>
 </html>
