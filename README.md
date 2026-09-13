@@ -409,7 +409,3 @@ Crear usuario administrador:
 ```bash
 python manage.py createsuperuser
 ```
-
-## Autor
-
-Proyecto desarrollado como parte del aprendizaje y evaluación de desarrollo web utilizando el framework Django.
