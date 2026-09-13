@@ -1,4 +1,4 @@
-# Gestor de Tareas - Django
+# Gestor de Proyectos y Tareas - Django
 
 ## Descripción
 
@@ -6,9 +6,7 @@ Aplicación web desarrollada con Django para gestionar proyectos y tareas de man
 
 El sistema permite a los usuarios registrarse, iniciar sesión y administrar sus propios proyectos y las tareas asociadas a cada uno. Además, incorpora autenticación, autorización, validación de formularios, panel de administración de Django y pruebas unitarias.
 
-El proyecto fue desarrollado aplicando funcionalidades y conceptos fundamentales del framework Django, incluyendo el uso de modelos, vistas basadas en clases, formularios, templates, relaciones entre modelos, autenticación y pruebas automatizadas.
-
----
+El proyecto aplica conceptos fundamentales del framework Django, incluyendo modelos, vistas basadas en clases, formularios, templates, relaciones entre modelos, autenticación y pruebas automatizadas.
 
 ## Funcionalidades
 
@@ -17,7 +15,7 @@ El proyecto fue desarrollado aplicando funcionalidades y conceptos fundamentales
 * Registro de nuevos usuarios.
 * Inicio de sesión.
 * Cierre de sesión.
-* Redirección automática después del inicio y cierre de sesión.
+* Redirección después del inicio y cierre de sesión.
 * Restricción de acceso a usuarios no autenticados.
 * Protección de los datos de cada usuario.
 
@@ -45,13 +43,11 @@ Los usuarios pueden:
 * Eliminar tareas.
 * Cambiar el estado de una tarea.
 
-Los estados disponibles son:
+Estados disponibles:
 
 * Pendiente
 * En proceso
 * Finalizada
-
----
 
 ## Tecnologías utilizadas
 
@@ -66,16 +62,14 @@ Los estados disponibles son:
 * Django Admin
 * Django Test Framework
 
----
-
 ## Estructura del proyecto
 
 ```text
-proyecto_modulo_06/
+gestor_proyectos_django/
 │
 ├── manage.py
-├── db.sqlite3
 ├── README.md
+├── .gitignore
 │
 ├── gestor_tareas/
 │   ├── __init__.py
@@ -117,8 +111,6 @@ proyecto_modulo_06/
         └── styles.css
 ```
 
----
-
 ## Modelos
 
 ### Proyecto
@@ -148,8 +140,6 @@ Sus principales campos son:
 
 Un proyecto puede tener múltiples tareas.
 
----
-
 ## Formularios
 
 La aplicación utiliza formularios de Django para validar y procesar los datos ingresados por los usuarios.
@@ -161,8 +151,6 @@ Se utilizan:
 * `ModelForm` para la creación y edición de tareas.
 
 Los formularios realizan validaciones antes de guardar información en la base de datos.
-
----
 
 ## Seguridad y autenticación
 
@@ -178,8 +166,6 @@ Se implementan:
 * Validación de formularios antes de guardar información.
 
 Los usuarios solamente pueden administrar sus propios proyectos y las tareas asociadas a ellos.
-
----
 
 ## Panel de administración
 
@@ -200,20 +186,18 @@ El panel administrativo se encuentra disponible en:
 /admin/
 ```
 
----
-
 ## Instalación
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/patricio-silva-morales/django-m-dulo-6.git
+git clone https://github.com/valehd/gestor_proyectos_django.git
 ```
 
 Ingresar al proyecto:
 
 ```bash
-cd proyecto_modulo_06
+cd gestor_proyectos_django
 ```
 
 ### 2. Crear el entorno virtual
@@ -254,8 +238,6 @@ La aplicación estará disponible en:
 http://127.0.0.1:8000/
 ```
 
----
-
 ## Uso de la aplicación
 
 ### Registro
@@ -290,8 +272,6 @@ Desde allí puede:
 
 El usuario puede cerrar sesión desde la opción **Salir** disponible en la navegación.
 
----
-
 ## Pruebas
 
 El proyecto incluye pruebas unitarias para comprobar el funcionamiento de los modelos y las vistas principales.
@@ -302,7 +282,9 @@ Para ejecutar las pruebas:
 python manage.py test
 ```
 
-Actualmente se incluyen **10 pruebas automatizadas**, que verifican, entre otros aspectos:
+Actualmente se incluyen **10 pruebas automatizadas**.
+
+Las pruebas verifican, entre otros aspectos:
 
 * Creación de proyectos.
 * Creación de tareas.
@@ -320,8 +302,6 @@ Ran 10 tests in 22.270s
 
 OK
 ```
-
----
 
 ## Arquitectura general
 
@@ -347,7 +327,7 @@ Se utilizan vistas genéricas de Django como:
 
 Los templates HTML presentan la información al usuario.
 
-Se utiliza herencia de templates mediante un archivo base:
+Se utiliza herencia de templates mediante:
 
 ```text
 base.html
@@ -355,14 +335,12 @@ base.html
 
 Esto permite reutilizar la estructura común de navegación y contenido de la aplicación.
 
----
-
 ## CRUD implementado
 
-La aplicación implementa operaciones CRUD completas, tanto para Proyecto como para Tarea.
-
-
----
+| Recurso  | Crear | Consultar | Editar | Eliminar |
+| -------- | :---: | :-------: | :----: | :------: |
+| Proyecto |   ✅   |     ✅     |    ✅   |     ✅    |
+| Tarea    |   ✅   |     ✅     |    ✅   |     ✅    |
 
 ## Base de datos
 
@@ -387,8 +365,6 @@ Para aplicarlas:
 ```bash
 python manage.py migrate
 ```
-
----
 
 ## Comandos principales
 
@@ -434,8 +410,6 @@ Crear usuario administrador:
 python manage.py createsuperuser
 ```
 
----
-
 ## Autor
-Valentina Hernández
+
 Proyecto desarrollado como parte del aprendizaje y evaluación de desarrollo web utilizando el framework Django.
