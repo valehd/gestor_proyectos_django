@@ -4,16 +4,52 @@
 
 {% block content %}
 
+<div class="breadcrumb">
+    <a href="{% url 'proyecto_detail' object.pk %}">
+        ← Volver al proyecto
+    </a>
+</div>
+
+<section class="card confirm-card">
+
+
 <h1>Eliminar proyecto</h1>
 
-<p>¿Seguro que deseas eliminar "{{ object.nombre }}"?</p>
+<p>
+    ¿Estás seguro de que deseas eliminar el proyecto
+    <strong>"{{ object.nombre }}"</strong>?
+</p>
+
+<p class="muted">
+    Esta acción eliminará también las tareas asociadas
+    y no se puede deshacer.
+</p>
 
 <form method="post">
+
     {% csrf_token %}
 
-    <button type="submit">Sí, eliminar</button>
+    <div class="actions">
+
+        <button
+            type="submit"
+            class="btn-danger"
+        >
+            Sí, eliminar proyecto
+        </button>
+
+        <a
+            class="btn-secondary"
+            href="{% url 'proyecto_detail' object.pk %}"
+        >
+            Cancelar
+        </a>
+
+    </div>
+
 </form>
 
-<a href="{% url 'proyecto_detail' object.pk %}">Cancelar</a>
+
+</section>
 
 {% endblock %}

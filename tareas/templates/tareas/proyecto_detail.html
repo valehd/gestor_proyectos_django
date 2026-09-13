@@ -4,43 +4,178 @@
 
 {% block content %}
 
-<a href="{% url 'proyecto_list' %}">Volver</a>
+<div class="breadcrumb">
+    <a href="{% url 'proyecto_list' %}">
+        ← Volver a mis proyectos
+    </a>
+</div>
 
-<h1>{{ proyecto.nombre }}</h1>
-<p>{{ proyecto.descripcion }}</p>
+<div class="page-header">
 
-<a href="{% url 'proyecto_update' proyecto.pk %}">Editar proyecto</a>
-<a href="{% url 'proyecto_delete' proyecto.pk %}">Eliminar proyecto</a>
 
-<hr>
+<div>
+    <h1>{{ proyecto.nombre }}</h1>
 
-<h2>Tareas</h2>
+    {% if proyecto.descripcion %}
+        <p>{{ proyecto.descripcion }}</p>
+    {% else %}
+        <p class="muted">
+            Este proyecto no tiene descripción.
+        </p>
+    {% endif %}
+</div>
 
-<a href="{% url 'tarea_create' proyecto.pk %}">Nueva tarea</a>
+<div class="actions">
+
+    <a
+        class="btn-secondary"
+        href="{% url 'proyecto_update' proyecto.pk %}"
+    >
+        Editar proyecto
+    </a>
+
+    <a
+        class="btn-danger"
+        href="{% url 'proyecto_delete' proyecto.pk %}"
+    >
+        Eliminar proyecto
+    </a>
+
+</div>
+
+
+</div>
+
+<div class="section-header">
+
+
+<div>
+    <h2>Tareas del proyecto</h2>
+
+    <p>
+        Organiza y realiza seguimiento de las tareas.
+    </p>
+</div>
+
+<a
+    class="btn"
+    href="{% url 'tarea_create' proyecto.pk %}"
+>
+    + Nueva tarea
+</a>
+
+
+</div>
 
 {% if proyecto.tareas.all %}
 
-    <ul>
-        {% for tarea in proyecto.tareas.all %}
-            <li>
-                <strong>{{ tarea.titulo }}</strong>
-                - {{ tarea.get_estado_display }}
 
-                <br>
+<div class="card">
 
-                {{ tarea.descripcion }}
+    <table>
 
-                <br>
+        <thead>
+            <tr>
+                <th>Tarea</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
 
-                <a href="{% url 'tarea_update' tarea.pk %}">Editar</a>
-                <a href="{% url 'tarea_delete' tarea.pk %}">Eliminar</a>
-            </li>
-        {% endfor %}
-    </ul>
+        <tbody>
+
+            {% for tarea in proyecto.tareas.all %}
+
+                <tr>
+
+                    <td>
+                        <strong>{{ tarea.titulo }}</strong>
+                    </td>
+
+                    <td>
+                        {% if tarea.descripcion %}
+                            {{ tarea.descripcion }}
+                        {% else %}
+                            <span class="muted">
+                                Sin descripción
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+
+                        {% if tarea.estado == "pendiente" %}
+                            <span class="badge badge-pendiente">
+                                {{ tarea.get_estado_display }}
+                            </span>
+
+                        {% elif tarea.estado == "en_proceso" %}
+                            <span class="badge badge-en_proceso">
+                                {{ tarea.get_estado_display }}
+                            </span>
+
+                        {% else %}
+                            <span class="badge badge-finalizada">
+                                {{ tarea.get_estado_display }}
+                            </span>
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <div class="table-actions">
+
+                            <a
+                                class="btn-secondary"
+                                href="{% url 'tarea_update' tarea.pk %}"
+                            >
+                                Editar
+                            </a>
+
+                            <a
+                                class="btn-danger"
+                                href="{% url 'tarea_delete' tarea.pk %}"
+                            >
+                                Eliminar
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
 
 {% else %}
 
-    <p>Este proyecto no tiene tareas.</p>
+
+<div class="empty-state">
+
+    <h2>No hay tareas todavía</h2>
+
+    <p>
+        Este proyecto todavía no tiene tareas.
+        Crea la primera para comenzar.
+    </p>
+
+    <a
+        class="btn"
+        href="{% url 'tarea_create' proyecto.pk %}"
+    >
+        + Crear primera tarea
+    </a>
+
+</div>
 
 {% endif %}
 

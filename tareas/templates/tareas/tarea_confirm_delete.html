@@ -4,16 +4,45 @@
 
 {% block content %}
 
+<section class="card confirm-card">
+
+
 <h1>Eliminar tarea</h1>
 
-<p>¿Seguro que deseas eliminar "{{ object.titulo }}"?</p>
+<p>
+    ¿Estás seguro de que deseas eliminar la tarea
+    <strong>"{{ object.titulo }}"</strong>?
+</p>
+
+<p class="muted">
+    Esta acción no se puede deshacer.
+</p>
 
 <form method="post">
+
     {% csrf_token %}
 
-    <button type="submit">Sí, eliminar</button>
+    <div class="actions">
+
+        <button
+            type="submit"
+            class="btn-danger"
+        >
+            Sí, eliminar tarea
+        </button>
+
+        <a
+            class="btn-secondary"
+            href="{% url 'proyecto_detail' object.proyecto.pk %}"
+        >
+            Cancelar
+        </a>
+
+    </div>
+
 </form>
 
-<a href="{% url 'proyecto_detail' object.proyecto.pk %}">Cancelar</a>
+
+</section>
 
 {% endblock %}
